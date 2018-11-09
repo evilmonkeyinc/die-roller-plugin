@@ -1,0 +1,38 @@
+{
+  "name": "die_roller_plugin",
+  "displayName": "Die Roller",
+  "description": "",
+  "category": "",
+  "documentLink": "",
+  "needsOAuth": false,
+  "providerData": [
+    {
+      "param": "enable",
+      "displayName": "Enable",
+      "description": "",
+      "type": "BOOLEAN",
+      "optional": false
+    }
+  ],
+  "hasOAuth": false,
+  "externalCalls": [
+    "parse"
+  ],
+  "module": [
+    {
+      "id": "parse_expression",
+      "name": "Parse Expression",
+      "description": "",
+      "hasReturn": true,
+      "param": [
+        {
+          "param": "expression",
+          "displayName": "Expression",
+          "description": "",
+          "type": "STRING",
+          "optional": false
+        }
+      ]
+    }
+  ]
+}

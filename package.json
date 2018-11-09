@@ -1,0 +1,22 @@
+{
+  "name": "die_roller_plugin",
+  "description": "Converse plugin to use the npm module 'die-roller' in converse",
+  "main": "plugin.js",
+  "author": "scott.mcgowan@wisemonkeygames.com",
+  "scripts": {
+    "test": "mocha test/plugin-test.js 'test/**/*-test.js'",
+    "converse-cli": "converse-cli"
+  },
+  "dependencies": {
+    "@converseai/plugins-sdk": "latest",
+    "die-roller": "^0.1.0"
+  },
+  "devDependencies": {
+    "converse-cli": "^1.0.13",
+    "body-parser": "1.18.2",
+    "chai": "4.1.2",
+    "express": "4.16.1",
+    "mocha": "4.0.0",
+    "supertest": "3.0.0"
+  }
+}
