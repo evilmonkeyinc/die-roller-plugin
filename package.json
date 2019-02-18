@@ -8,8 +8,8 @@
     "converse-cli": "converse-cli"
   },
   "dependencies": {
-    "@converseai/plugins-sdk": "latest",
-    "die-roller": "^0.1.0"
+    "@converseai/plugins-sdk": "^1.0.8",
+    "die-roller": "^0.1.1"
   },
   "devDependencies": {
     "converse-cli": "^1.0.13",
