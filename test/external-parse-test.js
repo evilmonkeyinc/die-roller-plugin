@@ -6,14 +6,15 @@
  * Plugins SDK. https://developers.converse.ai/
  */
 
+const { describe, it } = require('mocha');
 const request = require('supertest');
-const expect = require('chai').expect;
+const { expect } = require('chai');
+const { Status } = require('@converseai/plugins-sdk');
 const server = require('./lib/express');
-const Status = require('@converseai/plugins-sdk').Status;
+const appToken = require('../app-token');
 
-describe('parse', function () {
-
-  it('base', function (done) {
+describe('parse', () => {
+  it('base', (done) => {
     request(server)
       .post('/')
       .send({
@@ -23,17 +24,17 @@ describe('parse', function () {
           method: 'GET',
           queryParam: {
             expression: {
-              data: ['2d20k1+5']
-            }
+              data: ['2d20k1+5'],
+            },
           },
           'Content-Type': 'application/json',
           registrationData: {
-          }
-        }
+          },
+        },
       })
-      .set('X_CONVERSE_APP_TOKEN', require('../app-token'))
+      .set('X_CONVERSE_APP_TOKEN', appToken)
       .expect(200)
-      .end(function (err, res) {
+      .end((err, res) => {
         expect(res.body).to.have.property('status').to.equal(Status.SUCCESS);
         expect(res.body).to.have.property('externalCallReturn');
         expect(res.body.externalCallReturn).to.have.property('body').to.not.equal(undefined);
@@ -41,6 +42,5 @@ describe('parse', function () {
         expect(res.body.externalCallReturn).to.have.property('body').to.not.equal('');
         done();
       });
-  })
-
+  });
 });

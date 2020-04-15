@@ -6,17 +6,13 @@
  * Plugins SDK. https://developers.converse.ai/
  */
 
-'use strict';
 
-const Status = require('@converseai/plugins-sdk').Status;
+const { Status } = require('@converseai/plugins-sdk');
 const ExternalResponse = require('@converseai/plugins-sdk').Payloads.ExternalFunctionResponse;
-const ParseExpression = require('die-roller').parse;
+const ParseExpression = require('@evilmonkeyinc/die-roller').parse;
 
 module.exports = function parse(app, body) {
-
-  var response = new ExternalResponse();
-
+  const response = new ExternalResponse();
   response.setBody(ParseExpression(body.payload.queryParam.expression.data[0]));
-
   app.send(Status.SUCCESS, response);
 };

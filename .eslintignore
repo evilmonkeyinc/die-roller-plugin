@@ -1,5 +1,5 @@
 app-token.js
 node_modules
-plugin.js
-test/plugin-test.js
 test/lib/express.js
+test/plugin-test.js
+plugin.js
