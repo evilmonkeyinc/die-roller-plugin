@@ -3,3 +3,4 @@ node_modules
 plugin.js
 test/plugin-test.js
 test/lib/express.js
+*.log
