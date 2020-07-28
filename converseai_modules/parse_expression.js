@@ -7,7 +7,6 @@
  * Plugins SDK. https://developers.converse.ai/
  */
 
-
 const { Status } = require('@converseai/plugins-sdk');
 const { ModuleResponse } = require('@converseai/plugins-sdk').Payloads.Module;
 const ParseExpression = require('@evilmonkeyinc/die-roller').parse;

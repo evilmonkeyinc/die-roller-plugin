@@ -4,9 +4,9 @@
   "main": "plugin.js",
   "scripts": {
     "test": "mocha test/plugin-test.js 'test/**/*-test.js'",
-    "auth": "converse-cli auth",
-    "init": "converse-cli plugin init",
-    "deploy": "converse-cli deploy",
+    "deploy": "extension-scripts deploy",
+    "revoke": "extension-scripts revoke",
+    "logs": "extension-scripts logs",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -14,9 +14,10 @@
     "@evilmonkeyinc/die-roller": "^0.2.1"
   },
   "devDependencies": {
+    "@smartsheet-bridge/extension-scripts": "0.1.0-alpha.1",
+    "@smartsheet-bridge/extensionrc-legacy": "0.1.0-alpha.0",
     "body-parser": "1.18.2",
     "chai": "4.1.2",
-    "converse-cli": "^2.6.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-plugin-import": "^2.20.2",
@@ -25,6 +26,9 @@
     "express": "4.16.1",
     "mocha": "4.0.0",
     "supertest": "3.0.0"
+  },
+  "extension": {
+    "extends": "@smartsheet-bridge/extensionrc-legacy"
   },
   "author": "scott.mcgowan@wisemonkeygames.com",
   "eslintConfig": {
