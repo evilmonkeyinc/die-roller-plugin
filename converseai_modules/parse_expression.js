@@ -15,6 +15,15 @@ const ParseExpression = require('@evilmonkeyinc/die-roller').parse;
 module.exports = (app, body) => {
   const { expression } = body.payload.moduleParam;
 
+  if (ParseExpression === undefined || ParseExpression === null) {
+    app.fail({
+      httpStatus: 500,
+      code: 'UNEXPECTED_ERROR',
+      description: 'Failed to import die-roller.',
+    });
+    return;
+  }
+
   if (expression === undefined) {
     app.fail({
       httpStatus: 400,

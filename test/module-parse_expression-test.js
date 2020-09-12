@@ -15,9 +15,7 @@ const server = require('./lib/express');
 const appToken = require('../app-token');
 
 describe('Parse Expression', () => {
-  const expression = '2d20k1+5';
-
-  it('base', (done) => {
+  function doRequest(expression, callback) {
     request(server)
       .post('/')
       .send({
@@ -33,13 +31,51 @@ describe('Parse Expression', () => {
       })
       .set('X_CONVERSE_APP_TOKEN', appToken)
       .expect(200)
-      .end((err, res) => {
-        expect(res.body).to.have.property('status').to.equal(Status.SUCCESS);
-        expect(res.body).to.have.property('value');
-        expect(res.body.value).to.have.property('expression').to.equal(expression);
-        expect(res.body.value).to.have.property('expressions');
-        expect(res.body.value).to.have.property('result');
+      .end(callback);
+  }
+
+  const tests = [
+    {
+      name: 'Ability Check with advantage',
+      expression: '2d20k1+5',
+      expected: {
+        expressions: 2,
+        min: 6,
+        max: 25,
+      },
+    },
+    {
+      name: 'Stat Roll',
+      expression: '4d6kh3',
+      expected: {
+        expressions: 1,
+        min: 3,
+        max: 18,
+      },
+    },
+  ];
+
+  tests.forEach((test) => {
+    it(test.name, (done) => {
+      const promises = [];
+      for (let i = 0; i < 100; i += 1) {
+        const promise = new Promise((resolve) => {
+          doRequest(test.expression, (err, res) => {
+            expect(res.body).to.have.property('status').to.equal(Status.SUCCESS);
+            expect(res.body).to.have.property('value');
+            expect(res.body.value).to.have.property('expression').to.equal(test.expression);
+            expect(res.body.value).to.have.property('expressions').to.have.length(test.expected.expressions);
+            expect(res.body.value).to.have.property('result');
+            expect(res.body.value.result).to.be.gte(test.expected.min);
+            expect(res.body.value.result).to.be.lte(test.expected.max);
+            resolve(true);
+          });
+        });
+        promises.push(promise);
+      }
+      Promise.all(promises).then(() => {
         done();
       });
+    });
   });
 });
